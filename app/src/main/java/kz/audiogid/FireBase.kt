@@ -1,6 +1,5 @@
 package kz.audiogid
 
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.util.Log
 import com.google.android.gms.maps.GoogleMap
@@ -10,8 +9,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
 
-
 var AudioArr = mutableListOf<MediaPlayer>();
+var AudioArrHref  = mutableListOf<String>();
 
 @Suppress("DEPRECATION")
 class FireBaseBD {
@@ -60,22 +59,55 @@ class FireBaseBD {
         myRef.push().setValue("asd");
     }
 
-    fun getAudio(url: String) {
+    /*fun getAudio(url: String) {
+        stopAllSound()
+
+        try{
+            var checked = false;
+
+            if( AudioArrHref.size > 0 ){
+                loop@for( i in 0 until AudioArrHref.size ){
+                    if( url == AudioArrHref[i] ){
+                        stopAllSound()
+                        AudioArr[i].start()
+                        checked = true
+
+                        Log.d("azat while", "1");
+                    }
+                }
+
+                if( checked == false ){
+                    getWidthUrl(url)
+
+                    Log.d("azat while", "2");
+                }
+            }else{
+                getWidthUrl(url)
+            }
+        }
+        catch (e: NumberFormatException){}
+
+
+    }
+
+    fun getWidthUrl(url: String) {
+        val AUDIO = MediaPlayer();
+        AUDIO.setAudioStreamType(AudioManager.STREAM_MUSIC)
+
+        AUDIO.setDataSource(url)
+        AUDIO.prepareAsync()
+        AUDIO.setOnPreparedListener(MediaPlayer.OnPreparedListener { player -> player.start() })
+
+        AudioArr.add( AUDIO )
+        AudioArrHref.add(url)
+    }
+
+    fun stopAllSound(){
         loop@for(i in 0 until AudioArr.size){
             AudioArr[i].pause()
         }
+    }*/
 
-        try{
-            val AUDIO = MediaPlayer();
-            AUDIO.setAudioStreamType(AudioManager.STREAM_MUSIC)
-
-            AUDIO.setDataSource(url)
-            AUDIO.prepareAsync()
-            AUDIO.setOnPreparedListener(MediaPlayer.OnPreparedListener { player -> player.start() })
-            AudioArr.add( AUDIO );
-        }
-        catch (e: NumberFormatException){}
-    }
 
 }
 

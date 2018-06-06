@@ -17,5 +17,4 @@ class Data{
         dolgota.add(newDolgota)
         shirota.add(newShirota)
     }
-
 }

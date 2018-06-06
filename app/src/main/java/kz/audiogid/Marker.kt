@@ -1,6 +1,5 @@
 package kz.audiogid
 
-import android.util.Log
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -8,12 +7,10 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-
-
 class Marker: GoogleMap.OnMarkerClickListener {
 
 
-    val fb = FireBaseBD()
+    val mySound = Sound()
 
     private var mDarwin1: Marker? = null
 
@@ -23,12 +20,12 @@ class Marker: GoogleMap.OnMarkerClickListener {
 
         loop@for( i in 0 until name.size){
             if( title == name[i] ){
-                Log.d("azat Marker", name[i])
-
-                fb.getAudio( audio[i] )
+                isPlay = true
+                mySound.getAudio( audio[i] )
+                seekCount = 0
+                break
             }
         }
-
         return false;
     }
 
@@ -36,19 +33,11 @@ class Marker: GoogleMap.OnMarkerClickListener {
 
         val sydney = LatLng(dolgota, shirota)
 
-        /*googleMap.addMarker(MarkerOptions()
-                .position(sydney)
-                .title(name)
-                .snippet(value)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.audio))
-        )*/
-
-
         mDarwin1 = googleMap.addMarker(MarkerOptions()
                 .position(sydney)
                 .title(name)
                 .snippet(value)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.audio))
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
         )
 
         googleMap.setOnMarkerClickListener(this);
